@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem, getItemsValue } from 'redux/contacts';
+import { addItem } from 'redux/contacts';
 import { Formik, ErrorMessage } from 'formik';
 import {
   ContactForm,
@@ -11,6 +11,7 @@ import {
   PrimaryButtonIcon,
 } from './Form.styled';
 import * as yup from 'yup';
+import { getItemsValue } from 'redux/selectors';
 
 const mySchema = yup.object().shape({
   name: yup.string().min(2).required(),
@@ -47,7 +48,7 @@ export const MyForm = () => {
     const newName = {
       id: nanoid(),
       name: normalizedName(values.name),
-      number: normalizedNumber(values.number),
+      phone: normalizedNumber(values.number),
     };
     if (validateContact(newName)) {
       alert(`${newName.name} already exist`);

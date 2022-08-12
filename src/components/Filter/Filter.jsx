@@ -1,6 +1,7 @@
 import { Input } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterItems, getFilterValue } from 'redux/contacts';
+import { filterItems } from 'redux/contacts';
+import { getFilterValue } from 'redux/selectors';
 
 export const Filter = () => {
   const filter = useSelector(getFilterValue);
