@@ -44,7 +44,7 @@ export const MyForm = () => {
     return normalizedName;
   };
 
-  const hadleSubmit = (values, { resetForm }) => {
+  const hadlerSubmit = (values, { resetForm }) => {
     const newName = {
       id: nanoid(),
       name: normalizedName(values.name),
@@ -63,7 +63,7 @@ export const MyForm = () => {
     <Formik
       initialValues={{ name: '', number: '' }}
       validationSchema={mySchema}
-      onSubmit={hadleSubmit}
+      onSubmit={hadlerSubmit}
     >
       {props => (
         <ContactForm>
