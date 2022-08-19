@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { ContactsListItem, ContactsListButton } from './ContactsList.styled';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { getContacts } from 'redux/operations';
 import { deleteItem } from 'redux/contacts';
 import { getItemsValue, getFilterValue } from 'redux/selectors';
 
@@ -12,7 +12,7 @@ export const ContactsList = () => {
   const items = useSelector(getItemsValue);
 
   useEffect(() => {
-    dispatch(fetchContacts());
+    dispatch(getContacts());
   }, [dispatch]) 
 
   const normalizedValue = filter.toLowerCase();
