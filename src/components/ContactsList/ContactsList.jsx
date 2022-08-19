@@ -2,9 +2,9 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { ContactsListItem, ContactsListButton } from './ContactsList.styled';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useEffect } from 'react';
-import { getContacts } from 'redux/operations';
-import { deleteItem } from 'redux/contacts';
+import { getAllContacts, deleteCurrentContact} from 'redux/operations';
 import { getItemsValue, getFilterValue } from 'redux/selectors';
+import { toast } from "react-toastify";
 
 export const ContactsList = () => {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ export const ContactsList = () => {
   const items = useSelector(getItemsValue);
 
   useEffect(() => {
-    dispatch(getContacts());
+    dispatch(getAllContacts());
   }, [dispatch]) 
 
   const normalizedValue = filter.toLowerCase();
@@ -21,7 +21,8 @@ export const ContactsList = () => {
   );
 
   const deleteContact = contactId => {
-    dispatch(deleteItem(contactId));
+    toast.success('DELETE CONTACT!', {});
+    dispatch(deleteCurrentContact(contactId));
   };
 
   return (

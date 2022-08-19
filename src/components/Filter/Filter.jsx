@@ -1,6 +1,6 @@
 import { Input } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
-import { filterItems } from 'redux/contacts';
+import { filterContacts } from 'redux/actions';
 import { getFilterValue } from 'redux/selectors';
 
 export const Filter = () => {
@@ -8,7 +8,7 @@ export const Filter = () => {
   const dispatch = useDispatch();
 
   const handlerFilter = evt => {
-    dispatch(filterItems(evt.target.value));
+    dispatch(filterContacts(evt.target.value));
   };
 
   return (

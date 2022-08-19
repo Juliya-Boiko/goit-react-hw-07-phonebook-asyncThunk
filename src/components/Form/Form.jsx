@@ -1,6 +1,6 @@
 import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem } from 'redux/contacts';
+import { addNewContacts } from 'redux/operations';
 import { Formik, ErrorMessage } from 'formik';
 import {
   ContactForm,
@@ -12,6 +12,7 @@ import {
 } from './Form.styled';
 import * as yup from 'yup';
 import { getItemsValue } from 'redux/selectors';
+import { toast } from "react-toastify";
 
 const mySchema = yup.object().shape({
   name: yup.string().min(2).required(),
@@ -54,7 +55,8 @@ export const MyForm = () => {
       alert(`${newName.name} already exist`);
       return;
     } else {
-      dispatch(addItem(newName));
+      toast.success('ADD CONTACT!', {});
+      dispatch(addNewContacts(newName));
     }
     resetForm();
   };
