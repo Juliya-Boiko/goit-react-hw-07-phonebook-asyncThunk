@@ -1,13 +1,13 @@
-import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { ContactsListItem, ContactsListButton } from './ContactsList.styled';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useEffect } from 'react';
-import { getAllContacts, deleteCurrentContact} from 'redux/operations';
-import { getItemsValue, getFilterValue } from 'redux/selectors';
+import { getAllContacts, deleteCurrentContact} from 'redux/contacts/operations';
+import { getItemsValue, getFilterValue } from 'redux/contacts/selectors';
 import { toast } from "react-toastify";
+import { useRedux } from 'hooks/useRedux';
 
 export const ContactsList = () => {
-  const dispatch = useDispatch();
+  const [useSelector, dispatch] = useRedux();
   const filter = useSelector(getFilterValue);
   const items = useSelector(getItemsValue);
 

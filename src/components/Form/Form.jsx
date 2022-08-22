@@ -1,6 +1,5 @@
 import { nanoid } from 'nanoid';
-import { useDispatch, useSelector } from 'react-redux';
-import { addNewContacts } from 'redux/operations';
+import { addNewContacts } from 'redux/contacts/operations';
 import { Formik, ErrorMessage } from 'formik';
 import {
   ContactForm,
@@ -11,8 +10,9 @@ import {
   PrimaryButtonIcon,
 } from './Form.styled';
 import * as yup from 'yup';
-import { getItemsValue } from 'redux/selectors';
+import { getItemsValue } from 'redux/contacts/selectors';
 import { toast } from "react-toastify";
+import { useRedux } from 'hooks/useRedux';
 
 const mySchema = yup.object().shape({
   name: yup.string().min(2).required(),
@@ -20,8 +20,8 @@ const mySchema = yup.object().shape({
 });
 
 export const MyForm = () => {
+  const [useSelector, dispatch] = useRedux();
   const items = useSelector(getItemsValue);
-  const dispatch = useDispatch();
 
   const validateContact = data => {
     const normalizedValue = data.name.toLowerCase();
@@ -45,17 +45,17 @@ export const MyForm = () => {
     return normalizedName;
   };
 
-  const hadlerSubmit = (values, { resetForm }) => {
+  const handlerSubmit = (values, { resetForm }) => {
     const newName = {
       id: nanoid(),
       name: normalizedName(values.name),
       phone: normalizedNumber(values.number),
     };
     if (validateContact(newName)) {
-      alert(`${newName.name} already exist`);
+      toast.error(`${newName.name} already exist`);
       return;
     } else {
-      toast.success('ADD CONTACT!', {});
+      toast.success('ADD CONTACT!');
       dispatch(addNewContacts(newName));
     }
     resetForm();
@@ -65,7 +65,7 @@ export const MyForm = () => {
     <Formik
       initialValues={{ name: '', number: '' }}
       validationSchema={mySchema}
-      onSubmit={hadlerSubmit}
+      onSubmit={handlerSubmit}
     >
       {props => (
         <ContactForm>
