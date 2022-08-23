@@ -9,7 +9,7 @@ export const getAllContacts = createAsyncThunk(
       const data = await fetchAllContacts();
       return data;
     } catch (error) {
-      return toast.error(error.message);
+      return toast.error(error);
     }
   }
 );
@@ -23,7 +23,7 @@ export const addNewContacts = createAsyncThunk(
       const data = await fetchAllContacts();
       return data;
     } catch (error) {
-      return toast.error(error.message);
+      return toast.error(error);
     }
   }
 );
@@ -37,7 +37,7 @@ export const deleteCurrentContact = createAsyncThunk(
       const data = await fetchAllContacts();
       return data;
     } catch (error) {
-      return toast.error(error.message);
+      return toast.error(error);
     }
   }
 );
