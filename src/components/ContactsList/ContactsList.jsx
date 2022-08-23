@@ -3,7 +3,6 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useEffect } from 'react';
 import { getAllContacts, deleteCurrentContact} from 'redux/contacts/operations';
 import { getItemsValue, getFilterValue } from 'redux/contacts/selectors';
-import { toast } from "react-toastify";
 import { useRedux } from 'hooks/useRedux';
 
 export const ContactsList = () => {
@@ -21,7 +20,6 @@ export const ContactsList = () => {
   );
 
   const deleteContact = contactId => {
-    toast.success('DELETE CONTACT!', {});
     dispatch(deleteCurrentContact(contactId));
   };
 

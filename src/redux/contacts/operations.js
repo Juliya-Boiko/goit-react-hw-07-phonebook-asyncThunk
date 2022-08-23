@@ -1,38 +1,43 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { fetchAllContacts, fetchAddContact, fetchDeleteContact } from "api/contactsApi";
+import { toast } from "react-toastify";
 
 export const getAllContacts = createAsyncThunk(
   'contacts/requestStatus',
-  async (_, { rejectWithValue }) => {
+  async () => {
     try {
       const data = await fetchAllContacts();
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return toast.error(error.message);
     }
   }
 );
 
 export const addNewContacts = createAsyncThunk(
   'contacts/addContacts',
-  async (contact, { rejectWithValue }) => {
+  async (contact) => {
     try {
-      const data = fetchAddContact(contact);
+      await fetchAddContact(contact);
+      toast.success('Contact added!');
+      const data = await fetchAllContacts();
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return toast.error(error.message);
     }
   }
 );
 
 export const deleteCurrentContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (id, { rejectWithValue }) => {
+  async (id) => {
     try {
-      const data = await fetchDeleteContact(id);
+      await fetchDeleteContact(id);
+      toast.success('Contact deleted!');
+      const data = await fetchAllContacts();
       return data;
     } catch (error) {
-      return rejectWithValue(error);
+      return toast.error(error.message);
     }
   }
 );

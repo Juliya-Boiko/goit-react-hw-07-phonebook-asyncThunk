@@ -26,7 +26,7 @@ export const MyForm = () => {
   const validateContact = data => {
     const normalizedValue = data.name.toLowerCase();
     const result = items.find(item =>
-      item.name.toLowerCase().includes(normalizedValue)
+      item.name.toLowerCase() === normalizedValue
     );
     return result;
   };
@@ -55,7 +55,6 @@ export const MyForm = () => {
       toast.error(`${newName.name} already exist`);
       return;
     } else {
-      toast.success('ADD CONTACT!');
       dispatch(addNewContacts(newName));
     }
     resetForm();
